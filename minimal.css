@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 2rem;
+  background: #f9f9f9;
+  color: #222;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.logo {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.numbers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.number.big {
+  font-size: 10rem;
+  font-weight: bold;
+}
+
+.number.small {
+  font-size: 4rem;
+  opacity: 0.6;
+}
