@@ -1,5 +1,5 @@
 // Order number system
-let history = []; // keeps track of all states for undo
+let history = [0, 0, 0]; // keeps track of all states for undo
 let currentNumber = 0; // starts at 0
 let buffer = ''; // stores manual input digits
 

@@ -1,0 +1,55 @@
+body {
+  font-family: "Arial Black", sans-serif;
+  background: #fffaf7;          /* warm white, like menu paper */
+  color: #222;
+  text-align: center;
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.logo {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+/* Number display row */
+.numbers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+/* Current (big) number */
+.number.big {
+  font-size: 10rem;
+  font-weight: bold;
+  color: #b22222;                /* Panini red */
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Previous (smaller) numbers */
+.number.small {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #333;
+  opacity: 0.6;
+}
+
+/* Responsive scaling */
+@media (max-width: 768px) {
+  .number.big {
+    font-size: 5rem;
+  }
+  .number.small {
+    font-size: 2rem;
+  }
+  .logo {
+    max-width: 200px;
+  }
+}
