@@ -7,63 +7,74 @@ const currentEl = document.getElementById('current');
 const prev1El = document.getElementById('prev1');
 const prev2El = document.getElementById('prev2');
 const prev3El = document.getElementById('prev3');
+const clock = document.getElementById('clock');
 
 // Update the display
 function render() {
-  currentEl.textContent = currentNumber;
+    currentEl.textContent = currentNumber;
 
-  // Show last 3 numbers in history (skip current one)
-  const last = history.slice(-3).reverse();
-  prev1El.textContent = last[0] ?? '-';
-  prev2El.textContent = last[1] ?? '-';
-  prev3El.textContent = last[2] ?? '-';
+    // Show last 3 numbers in history (skip current one)
+    const last = history.slice(-3).reverse();
+    prev1El.textContent = last[0] ?? '-';
+    prev2El.textContent = last[1] ?? '-';
+    prev3El.textContent = last[2] ?? '-';
 }
 
 // Save current state into history
 function saveState() {
-  history.push(currentNumber);
-  if (history.length > 1000) history.shift(); // prevent infinite growth
+    history.push(currentNumber);
+    if (history.length > 1000) history.shift(); // prevent infinite growth
 }
 
 // Handle increment (Enter with empty buffer)
 function increment() {
-  saveState();
-  currentNumber++;
-  if (currentNumber > 100) currentNumber = 1; // wrap around
-  render();
+    saveState();
+    currentNumber++;
+    if (currentNumber > 100) currentNumber = 1; // wrap around
+    render();
 }
 
 // Handle jump (digits + Enter)
 function jumpTo(num) {
-  saveState();
-  currentNumber = num;
-  if (currentNumber > 100) currentNumber = 1;
-  render();
+    saveState();
+    currentNumber = num;
+    if (currentNumber > 100) currentNumber = 1;
+    render();
 }
 
 // Handle undo (space key)
 function undo() {
-  if (history.length === 0) return;
-  currentNumber = history.pop();
-  render();
+    if (history.length === 0) return;
+    currentNumber = history.pop();
+    render();
 }
 
 // Keyboard listener
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === '+') {
-    if (buffer.length > 0) {
-      jumpTo(parseInt(buffer, 10));
-      buffer = '';
-    } else {
-      increment();
+    if (e.key === 'Enter' || e.key === '+') {
+        if (buffer.length > 0) {
+            jumpTo(parseInt(buffer, 10));
+            buffer = '';
+        } else {
+            increment();
+        }
+    } else if (e.key === '-' || e.key === 'backspace') {
+        e.preventDefault(); // prevent scrolling
+        undo();
+    } else if (/^[0-9]$/.test(e.key)) {
+        buffer += e.key;
     }
-  } else if (e.key === '-') {
-    e.preventDefault(); // prevent scrolling
-    undo();
-  } else if (/^[0-9]$/.test(e.key)) {
-    buffer += e.key;
-  }
 });
+
+// add a clock from system in div clock
+function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    clock.textContent = `${hours}:${minutes}`;
+}
+setInterval(updateClock, 1000);
+updateClock(); // initial call
 
 // Initial render
 render();

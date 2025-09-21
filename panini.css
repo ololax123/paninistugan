@@ -15,6 +15,7 @@ body {
 .logo {
   max-width: 100%;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 /* Number display row */
@@ -39,6 +40,15 @@ body {
   font-weight: bold;
   color: #333;
   opacity: 0.6;
+}
+
+/* Clock display */
+.clock {
+  /* margin-top: 4rem; */
+  font-size: 4rem;
+  color: #b22222;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  text-align: left;
 }
 
 /* Responsive scaling */
